@@ -1,0 +1,42 @@
+﻿@model Apiest.Features.RequestBin.Core.Models.WebRequestGroup
+@{
+    ViewBag.Title = "Modify Request Bin";
+    Layout = "~/Views/Shared/_RequestBinLayout.cshtml";
+}
+
+@section ActionTitle
+{
+    Modify Request Bin
+}
+
+@section breadcrumb
+{
+    <li>@Html.ActionLink("Requests", "Index")</li>
+    <li>@Html.ActionLink("New Request Bin", "NewRequestBin")</li>
+    <li class="active">Modify Request Bin</li>
+}
+
+
+@section Action
+{
+
+    @using (Html.BeginForm("ModifyGroup"))
+    {
+        @Html.HiddenFor(model => model.GroupUniqueId)
+
+
+        <div class="row col-lg-7 col-md-7 col-sm-7  col-xs-8 pull-left" style="min-width: 360px;">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-primary">Bin:</div>
+            <div class="col-lg-3 col-md-4 col-sm-5 col-xs-6">
+                @Html.EditorFor(model => model.Name)
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2">
+                <input class="btn-xs btn-primary" type="submit" value="Update" />
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="margin: 3px 0 0 0;">
+                @Html.ActionLink("Cancel", "NewRequestBin", new { }, new { @class = "btn-sm btn-primary" })
+            </div>
+        </div>
+    }
+
+}

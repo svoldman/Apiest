@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" id="page">
+        <header class="container">
+            <div id="menu" class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header">
+                    <button class="btn btn-success navbar-toggle"
+                            data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </button>
+                    <div id="logo">
+                        <h4> Web Request Management</h4>
+                    </div>
+
+                    <ol class="breadcrumb" style="margin: 15px 0 0 0;">
+                        @RenderSection("breadcrumb")
+                    </ol>
+
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="navRequestBinList" class="nav active">@Html.ActionLink("Request Bin Stats", "Index")</li>
+                        <li id="navRequestBinCreate" class="nav">@Html.ActionLink("Request Bins", "NewRequestBin")</li>
+                        <li id="navRequestBinAllRequests" class="nav">@Html.ActionLink("All Requests", "AllRequests")</li>
+                        <li id="navRequestBinAbout" class="nav">@Html.ActionLink("About", "About")</li>
+                    </ul>
+                </div>
+            </div>
+
+        </header>
+        <section id="body" class="container">
+            <div class="page-header">
+                <h1>@RenderSection("ActionTitle")</h1>
+                <p class="text-warning">
+                    Request bin technology allows create different request containers.Create Request container, copy tracking URL from Request Bins requests.<br />
+                    Tracking Url allows to collect all requests under created Request Bin.<br />
+                </p>
+            </div>
+
+            <section id="main" class="col-md-12">
+
+                <section id="action" class="container" style="margin: 20px;">
+                    @RenderSection("Action")
+                </section>
+
+            </section>
+            @RenderBody()
+        </section>
+        <hr />
+        <footer class="container">
+            <address class="text-muted">
+                please don't include sensitive information in request body
+            </address>
+        </footer>
+
+        <script type="text/javascript">
+    $(
+        function() {
+            resetHighlights();
+            var activeItem = '@ViewBag.ActiveMenuItem';
+            activateMenuItem(activeItem);
+
+            $("#RequestBody").click(
+                function() {
+                    $("#" + this.id).select();
+                });
+
+            $("#TrackingUrlText").click(
+                function() {
+                    $("#" + this.id).select();
+                });
+        });
+
+    var activateMenuItem = function (menuItemName) {
+        $("#" + menuItemName).addClass("active");
+    }
+        var resetHighlights = function() {
+            $("#navRequestBinCreate").removeClass("active");
+            $("#navRequestBinList").removeClass("active");
+            $("#navRequestBinAllRequests").removeClass("active");
+            $("#navRequestBinList").removeClass("active");
+            $("#navRequestBinAbout").removeClass("active");
+        }
+        </script>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

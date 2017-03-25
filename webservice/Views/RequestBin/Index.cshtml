@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Apiest.Features.RequestBin.Core.Models.WebRequestGroup>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_RequestBinLayout.cshtml";
+}
+
+@section ActionTitle{
+    Your Requests Bins
+}
+
+
+@section breadcrumb
+{
+    <li class="active">Request Bins</li>
+}
+
+
+
+@section Action
+{
+    <div class="row col-md-4 col-sm-4 col-xs-12">
+        @Html.ActionLink("Refresh Request Bin Stats", "Index", new { }, new { @class = "btn-sm btn-primary" })
+    </div>
+    <table class="table table-striped table-hover ">
+
+        <thead>
+            <tr>
+                <th>Request Bin</th>
+                <th>Total Requests</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var group in Model)
+            {
+                <tr>
+
+
+
+                    <td>
+                        @Html.ActionLink(group.Name, "RequestsGroup", group)
+                    </td>
+                    <td>
+                        @Html.Encode(group.TotalRequests)
+                    </td>
+                    <td>
+                        <div class="row col-md-8" style="border: solid 1px transparent;">
+
+                            <div class="col-md-4">
+                                @Html.ActionLink("delete requests", "ResetGroup", group)
+                            </div>
+
+                            <div class="col-md-1 hidden-sm hidden-xs">
+                                |
+                            </div>
+
+                            <div class="col-md-4">
+                                @Html.ActionLink("delete bin", "DeleteGroup", group)
+                            </div>
+                        </div>
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

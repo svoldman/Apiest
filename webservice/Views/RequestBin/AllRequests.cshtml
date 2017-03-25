@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Apiest.Features.RequestBin.Core.Models.WebRequest>
+
+@{
+    ViewBag.Title = "AllRequests";
+    Layout = "~/Views/Shared/_RequestBinLayout.cshtml";
+}
+
+
+@section ActionTitle{
+    All Requests from Request Bins
+}
+
+@section breadcrumb
+{
+    <li>@Html.ActionLink("Requests", "Index")</li>
+    <li>@Html.ActionLink("New Request Bin", "NewRequestBin")</li>
+    <li class="active">All Requests</li>
+}
+
+
+
+
+@section Action
+{
+    @using (Ajax.BeginForm(new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "SearchResult"
+    }))
+    {
+        <div class="row col-md-7" style="margin: 0 0 20px 0;">
+            <div class="col-md-3">@Html.Label("Query String:", new { @style = "font-weight:strong;" })</div>
+            <div class="col-md-6">@Html.TextBox("SearchByQueryString", "", new { @style = "width:300px;" })</div>
+            <div class="col-md-3"><input type="submit" name="submit" value="search" class="btn-primary"></div>
+        </div>
+    }
+ 
+
+    <div class="row col-md-12 col-sm-12 col-xs-12 pull-left">
+        <div id="SearchResult">
+            @Html.Partial("_GroupRequests", Model)
+        </div>
+    </div>
+
+}
+
+

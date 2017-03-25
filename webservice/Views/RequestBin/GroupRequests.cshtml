@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Apiest.Features.RequestBin.Core.Models.WebRequest>
+    
+<div class="row col-md-8 pull-left">
+    @foreach (var model in Model)
+    {
+
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <div>
+                    <strong>Header:</strong>
+                </div>
+                <div>
+                    @Html.Encode(model.Header)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <strong>Query String:</strong>
+                </div>
+                <div>
+                    @Html.Encode(model.QueryString)
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12" style="margin: 15px 0 35px 0;">
+            @Html.TextArea("Body", model.Body, new { style = "width: 100%; height: 95px;", id = "RequestBody" })
+        </div>
+
+    }
+</div>

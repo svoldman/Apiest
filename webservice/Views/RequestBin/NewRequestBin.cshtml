@@ -1,0 +1,47 @@
+﻿@model System.Collections.Generic.IEnumerable<Apiest.Features.RequestBin.Core.Models.WebRequestGroup>
+
+
+@{
+    ViewBag.Title = "AllRequests";
+    Layout = "~/Views/Shared/_RequestBinLayout.cshtml";
+}
+
+
+
+@section ActionTitle{
+    Create And Manage Your Requests Bin
+}
+
+@section breadcrumb
+{
+    <li>@Html.ActionLink("Request Bins", "Index")</li>
+    <li class="active">New Request Bin</li>
+}
+
+
+@section Action
+{
+    @using (Html.BeginForm("NewRequestBin"))
+    {
+
+
+        <div class="row col-md-8 col-sm-7 col-xs-5 pull-left" style="min-width: 360px;">
+            <div class="col-md-1 col-sm-1  col-xs-1  text-primary text-left">Bin:</div>
+            <div class="col-md-7 col-sm-6 col-xs-5">@Html.TextBox("GroupName", "", new { style = "width: 100%;" })</div>
+            <div class="col-md-1 col-sm-1 col-xs-1">
+                <input class="btn-xs btn-primary" type="submit" value="Create" />
+            </div>
+        </div>
+
+        <div class="row col-md-8 col-sm-11 col-xs-12 pull-left">
+            @foreach (var group in Model)
+        {
+                @Html.Partial("_GroupDetailModify", group)
+            }
+        </div>
+
+    }
+
+
+
+}

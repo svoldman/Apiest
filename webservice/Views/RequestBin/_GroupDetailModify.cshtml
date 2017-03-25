@@ -1,0 +1,40 @@
+﻿@model Apiest.Features.RequestBin.Core.Models.WebRequestGroup
+
+
+<div style="padding: 15px 0 15px 0; min-width: 360px;">
+    <div class="col-md-12 col-sm-7 col-xs-12" style="margin-bottom: 15px; background: #f8f8f8;">
+        <div class="row">
+            <div class="col-md-1 col-sm-1 col-xs-1 text-primary">Bin:</div>
+            <div class="col-md-9 col-sm-9 col-xs-9">
+                @Html.Encode(Model.Name) ( @Html.LabelForModel(Model.TotalRequests, new { style = "font-weight: bold; color:red;" }))
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-2 text-primary">Track Url:</div>
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                @Html.TextArea("TrackingUrl", @String.Format("{0}/requesttracking/{1}", @Context.Request.Url.GetLeftPart(UriPartial.Authority), @Model.GroupUniqueId), new { style = "width: 100%;", id = "TrackingUrlText" })
+            </div>
+            <div class="col-md-1 col-sm-1 col-xs-1">
+                @Html.ActionLink("Delete", "DeleteRequestBin", Model)
+                @Html.ActionLink("Edit", "ModifyGroup", Model)
+            </div>
+        </div>
+        <div class="row col-md-12 col-sm-7 col-xs-12" style="min-width: 360px;">
+            <h4>API Requests:</h4>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-2 text-primary">All Requests:</div>
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                @Html.TextArea("TrackingUrl", String.Format("{0}/requesttracking/{1}/info", @Context.Request.Url.GetLeftPart(UriPartial.Authority), @Model.GroupUniqueId), new { style = "width: 100%;", id = "TrackingUrlText" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-2 text-primary">Delete Request:</div>
+            <div class="col-md-8 col-sm-8 col-xs-8">
+                @Html.TextArea("TrackingUrl", String.Format("{0}/requesttracking/{1}/delete/{{#RequestId}}", @Context.Request.Url.GetLeftPart(UriPartial.Authority), @Model.GroupUniqueId), new { style = "width: 100%;", id = "TrackingUrlText" })
+            </div>
+        </div>
+
+
+    </div>
+</div>

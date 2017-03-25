@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "RequestsGroup";
+    Layout = "~/Views/Shared/_RequestBinLayout.cshtml";
+}
+
+@section ActionTitle
+{
+    All Requests from Request Bin - "@Html.Encode(Model.Name)"
+}
+
+@section breadcrumb
+{
+    <li>@Html.ActionLink("Request Bins", "Index")</li>
+    <li class="active">Request Bin Stats</li>
+}
+
+
+
+
+@section Action
+{
+
+    <div class="row">
+        @Html.Action("GroupRequests", "RequestBin", new { groupId = Model.Id })
+    </div>
+}
+
+
